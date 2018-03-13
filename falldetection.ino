@@ -18,13 +18,7 @@ void loop(){
   Wire.requestFrom(MPU_addr,14,true);  // request a total of 14 registers
   AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
   Xpos=Xpos*0.9+AcX*0.1;
-  
-  //Serial.print("AcX = "); Serial.print(AcX);
-
-  //Serial.print(" | Xpos = "); Serial.println(Xpos);
    dx=abs(AcX-Xpos);
-   //Serial.print("dx= ");Serial.println(dx);
-
    if(dx>20000)
    {
       Serial.println("AT+CMGF=1");
@@ -35,7 +29,6 @@ void loop(){
       delay(2000);
       Serial.println(" FALL ALERT....");
       Serial.write(0x1A);
-      //while(1);
    }
   delay(333);
   
