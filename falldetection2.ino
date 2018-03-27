@@ -25,7 +25,7 @@ void loop(){
   AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
   Xpos=Xpos*0.9+AcX*0.1;
    dx=abs(AcX-Xpos);
-   if(dx>20000)
+   if(dx>15000)
    {
         gsm.print("AT+CMGF=1\r");
         delay(1000);
