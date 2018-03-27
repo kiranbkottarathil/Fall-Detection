@@ -1,11 +1,11 @@
 
 #include<Wire.h>
 #include<SoftwareSerial.h>
-SoftwareSerial gsm(4,5);
+SoftwareSerial gsm(4,5);//(tx,rx)
 String outMessage = "Fall occured";
 String destinationNumber = "+918848257619";
 
-const int MPU_addr=0x68;  // I2C address of the MPU-6050
+const int MPU_addr=0x68;  // I2C address of the MPU-6050 //AD0 connected to gnd
 float AcX;
 float Xpos,dx;
 void setup(){
@@ -23,7 +23,7 @@ void loop(){
   Wire.endTransmission(false);
   Wire.requestFrom(MPU_addr,14,true);  // request a total of 14 registers
   AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
-  Xpos=Xpos*0.9+AcX*0.1;
+  Xpos=Xpos*0.9+AcX*0.1;//
    dx=abs(AcX-Xpos);
    if(dx>15000)
    {
